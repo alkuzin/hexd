@@ -6,7 +6,7 @@
 /*   By: alkuzin <->                                                          */
 /*                                                                            */
 /*   Created: 2023/12/29 12:00:17 by alkuzin                                  */
-/*   Updated: 2023/12/29 19:24:35 by alkuzin                                  */
+/*   Updated: 2023/12/29 20:05:04 by alkuzin                                  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int main(int argc, char** argv)
 
 	if (argc < 2 || argc > 3)
     {
-        puts("[!] Incorrect number of arguments\n"
-        "Use '--help' or '-h' to see options list");
+        puts("hexd: incorrect number of arguments\n"
+        "hexd: use '--help' or '-h' to see options list");
         exit(1);
     }
 
@@ -36,23 +36,29 @@ int main(int argc, char** argv)
 
     if (!(argv[1][0] == '-') || strlen(argv[1]) <= 1)
     {
-        printf("[!] Incorrect option '%s'\n"
-        "Use '--help' or '-h' to see options list\n", argv[1]);
+        printf("hexd: incorrect option '%s'\n"
+        "hexd: use '--help' or '-h' to see options list\n", argv[1]);
         exit(EXIT_FAILURE);
     }
-    
+	
+	if(argc == 2)
+	{
+        puts("hexd: empty file name or incorrect option");
+        exit(EXIT_FAILURE);
+	}
+
     strncpy(filename, argv[2], FILENAME_SIZE);
     if(!(fp = fopen(filename, "rb")))
     {
-        printf("[x] Error to open file '%s'\n"
-        "File doesn't exist or corrupted\n", filename);
+        printf("hexd: error to open file '%s'\n"
+        "hexd: file doesn't exist or corrupted\n", filename);
         exit(EXIT_FAILURE);
 	}	
     
 	if ((base = set_base(argv[1][1])) == -1)
 	{
-        printf("[!] Incorrect option '%s'\n"
-        "Use '--help' or '-h' to see options list\n", argv[1]);
+        printf("hexd: incorrect option '%s'\n"
+        "hexd: use '--help' or '-h' to see options list\n", argv[1]);
         exit(EXIT_FAILURE);
 	}
 
@@ -62,7 +68,7 @@ int main(int argc, char** argv)
     {
         fpos_t pos;
         fgetpos(fp, &pos);
-        printf("[x] Can't reach the end of the file on pos: %lld\n", (long long int)pos.__pos);
+        printf("hexd: can't reach the end of the file on pos: %lld\n", (long long int)pos.__pos);
     }
 
     fclose(fp);
