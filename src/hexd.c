@@ -6,7 +6,7 @@
 /*   By: alkuzin <->                                                          */
 /*                                                                            */
 /*   Created: 2023/12/26 13:01:07 by alkuzin                                  */
-/*   Updated: 2023/12/29 19:31:39 by alkuzin                                  */
+/*   Updated: 2023/12/29 19:53:03 by alkuzin                                  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int set_size(int base, char *fmt);
 static char to_print(unsigned char c);
 
 // hexd title
-static const char *title =      
+static const char *title = "\n"     
 " ██╗  ██╗███████╗██╗  ██╗██████╗  \n"
 " ██║  ██║██╔════╝╚██╗██╔╝██╔══██╗ \n"
 " ███████║█████╗   ╚███╔╝ ██║  ██║ \n"
