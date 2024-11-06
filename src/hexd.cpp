@@ -51,7 +51,7 @@ void help(void)
         "\t-o\t\tone-byte octal display\n"
         "\t-b\t\tone-byte binary display\n\n"
         "\t-h, --help\tdisplay options list\n"
-        "\t-v, --version\tdisplay version of hexd", HEXD_TITLE
+        "\t-v, --version\tdisplay version of hexd\n", HEXD_TITLE
     );
     std::exit(EXIT_SUCCESS);
 }
