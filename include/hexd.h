@@ -17,24 +17,23 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#ifndef _HEXD_HPP_
-#define _HEXD_HPP_
+#ifndef HEXD_H
+#define HEXD_H
 
-#include <string>
+#include <string.h>
 
-namespace hexd {
 
-enum class MODE {
+enum MODE {
     HEX,
     OCT,
     BIN,
 };
 
 /** @brief Display list of commands.*/
-void help(void) noexcept;
+void hexd_help(void);
 
 /** @brief Display version.*/
-void version(void) noexcept;
+void hexd_version(void);
 
 /**
  * @brief Memory dump of given file.
@@ -42,8 +41,6 @@ void version(void) noexcept;
  * @param [in] mode - given bytes output mode.
  * @param [in] filename - given target filename.
  */
-void dump(MODE mode, const std::string_view& filename) noexcept;
+void hexd_dump(enum MODE mode, const char *filename);
 
-} // namespace hexd
-
-#endif // _HEXD_HPP_
+#endif // HEXD_H

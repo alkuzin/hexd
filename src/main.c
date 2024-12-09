@@ -17,19 +17,21 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include <hexd.hpp>
+#include <stdlib.h>
+#include <stdint.h>
 #include <getopt.h>
-#include <print>
+#include <stdio.h>
+#include <hexd.h>
 
 
-std::int32_t main(std::int32_t argc, char **argv)
+int32_t main(int32_t argc, char **argv)
 {
     if (argc < 2) {
-        std::println("hexd: Use '-h' or '--help' for usage.");
-        std::exit(EXIT_FAILURE);
+        puts("hexd: Use '-h' or '--help' for usage.");
+        exit(EXIT_FAILURE);
     }
 
-    option long_options[] = {
+    struct option long_options[] = {
         {"hex",     required_argument, 0, 'x'},
         {"oct",     required_argument, 0, 'o'},
         {"bin",     required_argument, 0, 'b'},
@@ -38,40 +40,40 @@ std::int32_t main(std::int32_t argc, char **argv)
         {0,         0,                 0,  0 }
     };
 
-    hexd::MODE mode  = hexd::MODE::HEX;
-    std::int32_t opt = 0;
+    enum MODE mode = HEX;
+    int32_t opt    = 0;
 
     while ((opt = getopt_long(argc, argv, "hvx:o:b:", long_options, 0)) != -1) {
         switch (opt) {
         // handle -x, --hex
         case 'x':
-            mode = hexd::MODE::HEX;
+            mode = HEX;
             break;
 
         // handle -o, --oct
         case 'o':
-            mode = hexd::MODE::OCT;
+            mode = OCT;
             break;
 
         // handle -b, --bin
         case 'b':
-            mode = hexd::MODE::BIN;
+            mode = BIN;
             break;
 
         // handle -h, --help
         case 'h':
-            hexd::help();
+            hexd_help();
             break;
 
         // handle -v, --version
         case 'v':
-            hexd::version();
+            hexd_version();
             break;
 
         // handle unknown options
         case '?':
-            std::println("Use -h or --help for usage.");
-            std::exit(EXIT_FAILURE);
+            puts("Use -h or --help for usage.");
+            exit(EXIT_FAILURE);
             break;
 
         default:
@@ -80,9 +82,9 @@ std::int32_t main(std::int32_t argc, char **argv)
     }
 
     if (optind <= argc)
-        hexd::dump(mode, argv[optind-1]);
+        hexd_dump(mode, argv[optind-1]);
     else
-        std::println("ntool: expected target after -x/--hex option");
+        puts("ntool: expected target after -x/--hex option");
 
     return 0;
 }
